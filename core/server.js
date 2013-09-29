@@ -242,7 +242,7 @@ when(ghost.init()).then(function () {
 
     // ##Configuration
     var oneYear = 31536000000,
-        oneHour = 3600;
+        oneHour = 3600000;
 
     // TODO: Implement query strings on assets so that the caches can be cleared
 
