@@ -141,6 +141,10 @@
                 this.removeExtras();
                 this.buildExtras();
                 this.bindFileUpload();
+                if (!settings.fileStorage) {
+                    self.initUrl();
+                    return;
+                }
                 $dropzone.find('a.image-url').on('click', function () {
                     self.initUrl();
                 });
@@ -150,7 +154,9 @@
                 this.removeExtras();
                 $dropzone.addClass('image-uploader-url').removeClass('pre-image-uploader');
                 $dropzone.find('.js-fileupload').addClass('right');
-                $dropzone.append($cancel);
+                if (settings.fileStorage) {
+                    $dropzone.append($cancel);
+                }
                 $dropzone.find('.js-cancel').on('click', function () {
                     $dropzone.find('.js-url').remove();
                     $dropzone.find('.js-fileupload').removeClass('right');
@@ -216,9 +222,9 @@
     $.fn.upload = function (options) {
         var settings = $.extend({
             progressbar: true,
-            editor: false
+            editor: false,
+            fileStorage: true
         }, options);
-
         return this.each(function () {
             var $dropzone = $(this),
                 ui;
